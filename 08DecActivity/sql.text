@@ -1,0 +1,102 @@
+Whthout Runing These Quries Write Result of Each SQL Statement 
+
+1 // Creating table users and columns ID and username and id as a primary key and automatically id will be allocated.
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50)
+);
+
+2 // Inserting username into users table.
+
+INSERT INTO users (username)
+VALUES
+	('monahan93'),
+  ('pferrer'),
+  ('si93onis'),
+  ('99stroman');
+
+3 // Creating table Photos and columns ID and username and id as a primary key and automatically id will be allocated and foregin key from users table.
+
+CREATE TABLE photos (
+  id SERIAL PRIMARY KEY,
+  url VARCHAR(200),
+  user_id INTEGER REFERENCES users(id)
+);
+
+4 // Inserting values in photos table.
+
+INSERT INTO photos (url, user_id)
+VALUES
+	('http://one.jpg', 4);
+
+5 // Inserting multiple values in photos table.
+
+INSERT INTO photos (url, user_id)
+VALUES
+	('http://two.jpg', 1),
+  ('http://25.jpg', 1),
+  ('http://36.jpg', 1),
+  ('http://754.jpg', 2),
+  ('http://35.jpg', 3),
+  ('http://256.jpg', 4);
+
+6 // Inserting values in photos table with foregin key value as NULL,
+INSERT INTO photos (url, user_id)
+VALUES ('http://jpg', NULL);
+
+7 // Removing photo table from the database.
+DROP TABLE photos;
+
+8// Again, creating table Photos and columns ID and username and id as a primary key and automatically id will be allocated and foregin key from users table and values will be deleted if foregin key is not matched in parent table.
+
+CREATE TABLE photos (
+  id SERIAL PRIMARY KEY,
+  url VARCHAR(200),
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+);
+
+9 // Inserting values into photos table.
+
+INSERT INTO photos (url, user_id)
+VALUES
+	('http://one.jpg', 4),
+	('http://two.jpg', 1),
+  ('http://25.jpg', 1),
+  ('http://36.jpg', 1),
+  ('http://754.jpg', 2),
+  ('http://35.jpg', 3),
+  ('http://256.jpg', 4);
+
+
+10 // Deleting values of user with id 1.
+DELETE FROM users
+WHERE id = 1;
+
+
+11 // Deleting photos table.
+DROP TABLE photos;
+
+
+
+12 // Again, creating table Photos and columns ID and username and id as a primary key and automatically id will be allocated and foregin key from users table and data will be deleted if id is set to null of any value.
+
+CREATE TABLE photos ( 
+  id SERIAL PRIMARY KEY,
+  url VARCHAR(200),
+  user_id INTEGER REFERENCES users(id) ON DELETE SET NULL
+);
+
+
+13 // Inserting vales in photos table.
+
+INSERT INTO photos (url, user_id)
+VALUES
+  ('http:/one.jpg', 4),
+  ('http:/754.jpg', 2),
+  ('http:/35.jpg', 3),
+  ('http:/256.jpg', 4);
+
+// Deleting data of user with id 4.
+
+DELETE FROM users
+WHERE id = 4;
